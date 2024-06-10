@@ -1,0 +1,67 @@
+1. Project Structure Overview
+The project is structured to separate different concerns, such as API endpoints, middleware, queue management, services, and configuration. This modular approach makes the code easier to manage and scale.
+
+2. API Endpoints (src/api)
+The api directory contains three mock API endpoints (api1.js, api2.js, and api3.js). Each endpoint simulates a different response time:
+
+api1.js: Simulates a fast response.
+api2.js: Simulates a medium response.
+api3.js: Simulates a slow response.
+These endpoints are used to demonstrate how the load balancer distributes traffic to different servers with varying performance characteristics.
+
+3. Configuration (src/config.js)
+The config.js file holds configuration settings such as the list of API endpoints and the path for the logging file. This centralizes configuration, making it easy to update and manage.
+
+4. Logger Middleware (src/middlewares/logger.js)
+The logger middleware captures details about each incoming request, such as the method, URL, status, and response time, and writes these details to a log file. This is useful for monitoring and debugging:
+
+logRequest: Middleware function that logs request details to logs/requests.log.
+5. Queues (src/queues)
+This directory contains implementations of different queuing strategies:
+
+Queue: A basic FIFO (First In, First Out) queue.
+PriorityQueue: A queue that sorts requests based on priority.
+RoundRobinQueue: A queue that distributes requests in a round-robin fashion.
+These queues manage how requests are processed, allowing for flexible handling of different traffic patterns.
+
+6. Routing Logic in Load Balancer (src/services/loadBalancer.js)
+The load balancer service is responsible for routing requests to the appropriate API endpoints based on custom logic. It can use criteria such as URL patterns, HTTP methods, and request payloads to make routing decisions. Additionally, it logs the request and response times for monitoring:
+
+routeRequest: Function that determines which endpoint to send a request to.
+handleRequest: Function that sends the request to the chosen endpoint and logs the details.
+7. Queue Manager (src/services/queueManager.js)
+The queue manager service handles the enqueuing and dequeuing of requests using the specified queuing strategy. It ensures that requests are processed in an orderly fashion:
+
+processQueue: Function that processes requests from the queue.
+enqueueRequest: Function that adds incoming requests to the queue.
+8. API Routes (src/routes/apiRoutes.js)
+The apiRoutes.js file sets up the routes for the mock API endpoints. It uses the Express router to direct incoming requests to the correct endpoint handlers.
+
+9. Load Balancer Routes (src/routes/loadBalancerRoutes.js)
+The loadBalancerRoutes.js file sets up the route for the load-balanced endpoint. Requests to this route are managed by the queue manager and load balancer services.
+
+10. Main Server File (src/server.js)
+The main server file initializes the Express application, applies middleware, and sets up the routes:
+
+express.json(): Middleware for parsing JSON request bodies.
+logRequest: Logger middleware to capture request details.
+apiRoutes: Routes for the mock API endpoints.
+loadBalancerRoutes: Route for the load-balanced endpoint.
+11. Logging Directory (logs/requests.log)
+The logs directory contains the requests.log file, which stores logs of incoming requests and their response times. This is useful for tracking the performance of the load balancer and the endpoints.
+
+12. package.json
+The package.json file includes the project metadata and dependencies. It also defines the start scripts for running the server:
+
+start: Runs the server using Node.js.
+dev: Runs the server using Nodemon for automatic restarts during development.
+13. README.md
+The README.md file provides an overview of the project, setup instructions, a description of the endpoints, logging details, and information about queuing strategies.
+
+How It All Fits Together
+Initialization: When the server starts, the Express application is set up with the necessary middleware and routes.
+Handling Requests: Incoming requests to /loadbalanced-endpoint are handled by the queue manager, which enqueues the requests.
+Routing Requests: The load balancer routes each request to an appropriate API endpoint based on custom logic.
+Logging: The logger middleware logs details about each request, such as the method, URL, status, and response time, to the requests.log file.
+Processing Requests: The queue manager processes the requests in the queue based on the selected queuing strategy (FIFO, priority, round-robin).
+This setup ensures that incoming traffic is intelligently managed and distributed across multiple API endpoints, with comprehensive logging and flexible queue management for optimal performance.

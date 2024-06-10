@@ -1,0 +1,26 @@
+{
+  "name": "manohar-meena-wasserstoff-backendtask",
+  "version": "1.0.0",
+  "description": "An intelligent load balancer for multi-API management",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": [
+    "load balancer",
+    "api",
+    "nodejs",
+    "express"
+  ],
+  "author": "Manohar Meena",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
