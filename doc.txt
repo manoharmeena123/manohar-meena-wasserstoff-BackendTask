@@ -65,3 +65,9 @@ Routing Requests: The load balancer routes each request to an appropriate API en
 Logging: The logger middleware logs details about each request, such as the method, URL, status, and response time, to the requests.log file.
 Processing Requests: The queue manager processes the requests in the queue based on the selected queuing strategy (FIFO, priority, round-robin).
 This setup ensures that incoming traffic is intelligently managed and distributed across multiple API endpoints, with comprehensive logging and flexible queue management for optimal performance.
+
+
+
+
+#rabbitmq
+http://localhost:15672/#/
