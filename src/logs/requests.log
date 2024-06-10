@@ -7,3 +7,6 @@ Method: GET, URL: /api2/endpoint, Status: 200, Response Time: 2ms
 Method: GET, URL: /api3/endpoint, Status: 200, Response Time: 3ms
 Method: GET, URL: /loadbalanced-endpoint, Status: 200, Response Time: 2ms
 Method: GET, URL: /loadbalanced-endpoint, Status: 200, Response Time: 2ms
+Method: GET, URL: /, Status: 404, Response Time: 15ms
+Method: GET, URL: /api1/endpoint, Status: 200, Response Time: 118ms
+Method: GET, URL: /favicon.ico, Status: 404, Response Time: 16ms

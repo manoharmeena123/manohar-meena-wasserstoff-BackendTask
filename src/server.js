@@ -6,14 +6,11 @@ const { connectRabbitMQ } = require('./queues/rabbitMQ');
 const { startQueueManager } = require('./services/queueManager');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(logRequest);
 
-app.use("/",(req,res)=>{
-    res.json("Welcome to my server")
-})
 app.use('/', apiRoutes);
 app.use('/', loadBalancerRoutes);
 
