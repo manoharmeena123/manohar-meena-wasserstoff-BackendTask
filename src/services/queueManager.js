@@ -1,18 +1,17 @@
-const { Queue, PriorityQueue, RoundRobinQueue } = require('../queues');
+const { enqueueRequest, consumeRequests } = require('../queues/rabbitMQ');
 const { handleRequest } = require('./loadBalancer');
 
-const requestQueue = new Queue(); // Change to PriorityQueue or RoundRobinQueue as needed
+const startQueueManager = async () => {
+    await consumeRequests(handleRequest);
+};
 
-const processQueue = async () => {
-    while (requestQueue.size() > 0) {
-        const { req, res } = requestQueue.dequeue();
-        await handleRequest(req, res);
+const enqueue = async (req, res) => {
+    try {
+        await enqueueRequest({ req, res });
+        res.status(202).send('Request enqueued');
+    } catch (error) {
+        res.status(500).send('Error enqueuing request');
     }
 };
 
-const enqueueRequest = (req, res) => {
-    requestQueue.enqueue({ req, res });
-    processQueue();
-};
-
-module.exports = { enqueueRequest };
+module.exports = { startQueueManager, enqueue };

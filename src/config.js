@@ -6,5 +6,8 @@ module.exports = {
     ],
     logging: {
         file: 'logs/requests.log'
+    },
+    rabbitMQ: {
+        url: 'amqp://localhost'
     }
 };

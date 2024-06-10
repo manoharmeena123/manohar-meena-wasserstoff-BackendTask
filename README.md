@@ -18,7 +18,7 @@ This project is a demonstration of an intelligent load balancer that dynamically
 Logs are stored in `logs/requests.log` and include details about request URLs and response times.
 
 ## Queuing Strategies
-The load balancer uses a simple queue by default. To change the queue type, update the `requestQueue` in `src/services/queueManager.js`.
+The load balancer uses RabbitMQ for managing request queues. To change the queue type, update the `requestQueue` in `src/services/queueManager.js`.
 
 ## Video Screencast
 [Video Link](#)
