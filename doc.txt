@@ -73,6 +73,13 @@ This setup ensures that incoming traffic is intelligently managed and distribute
 http://localhost:15672/#/
 
 
+confige
+  sudo nginx -t
+
+restarts
+   
+
+
 
 
 
@@ -99,3 +106,48 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 }
+
+
+
+# Server ports for different instances
+PORT=3000
+
+# MongoDB configuration
+MONGODB_URI=mongodb+srv://manoharmeena123:manoharmeena@cluster0.yhmup5a.mongodb.net/wasserstoffdb?retryWrites=true&w=majority
+
+# RabbitMQ configuration
+RABBITMQ_URL=amqp://localhost:5672
+
+# QueueName
+QUEUE_NAME=load_balancer_queue
+
+
+
+
+
+REST API Endpoints
+Products
+GET http://localhost:3000/api/products: Retrieve all products
+GET http://localhost:3000/api/products/:id: Retrieve a product by ID
+POST http://localhost:3000/api/products: Create a new product
+PUT http://localhost:3000/api/products/:id: Update a product by ID
+DELETE http://localhost:3000/api/products/:id: Delete a product by ID
+
+
+
+Users
+GET http://localhost:3000/api/users: Retrieve all users
+GET http://localhost:3000/api/users/:id: Retrieve a user by ID
+POST http://localhost:3000/api/users: Create a new user
+PUT http://localhost:3000/api/users/:id: Update a user by ID
+DELETE http://localhost:3000/api/users/:id: Delete a user by ID
+
+
+Orders
+GET http://localhost:3000/api/orders: Retrieve all orders
+GET http://localhost:3000/api/orders/:id: Retrieve an order by ID
+POST http://localhost:3000/api/orders: Create a new order
+PUT http://localhost:3000/api/orders/:id: Update an order by ID
+DELETE http://localhost:3000/api/orders/:id: Delete an order by ID
+GraphQL API Endpoint
+Access the GraphQL API at http://localhost:3000/graphql.
